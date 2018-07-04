@@ -112,19 +112,19 @@ def robot_params(name):
         #
         # alpha, d, r, theta
         dh = sp.Matrix([
-            [  0,       a_1 , l_1 ,     th_1  ],
-            [ sp.pi/2,    0,  0  ,      th_2  ],
-            [      0 ,  a_2,  0  ,      th_3  ],
-            [   0      ,    0   ,   l_3   ,  0  ],
-            [   0      ,    0   ,   0     ,   0   ],
-            [   0      ,    0   ,   0     ,   0   ]
+            [ 0,        a_1 ,  l_1  ,  th_1  ],
+            [ sp.pi/2,  0   ,  l_2  ,  th_2  ],
+            [ 0 ,       0   ,  l_3  ,  th_3  ],
+            [ 0 ,       0   ,  0    ,  0  ],
+            [ 0 ,       0   ,  0    ,  0   ],
+            [ 0 ,       0   ,  0    ,  0   ]
             ])
         vv = [1,1,1,1,1,1]
 
         variables = [unknown(th_1), unknown(th_2), unknown(th_3)]
 
         params = [a_1,l_1,l_2,l_3]
-        pvals = {a_1:32,l_1:40,l_2:51,l_3:178}
+        pvals = {a_1:85,l_1:40,l_2:51,l_3:178}
 
     if(name == 'MiniDD'):
         #
