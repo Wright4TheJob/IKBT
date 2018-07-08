@@ -110,21 +110,26 @@ def robot_params(name):
         #
         #   Probe Arm for circuit board testing
         #
-        # alpha, d, r, theta
+        # alpha, d, r or a, theta
+        # alpha is rotation of z about x to align to new link
+        # d is distance between axes
+        # r (or a) is distance along axis of rotation the normal intersects with prior link
+        # theta is angle about z to align x and previous x
+        # l_1 is x displacement of base, a_1 is height
         dh = sp.Matrix([
-            [ 0,        a_1 ,  l_1  ,  th_1  ],
-            [ sp.pi/2,  0   ,  l_2  ,  th_2  ],
-            [ 0 ,       0   ,  l_3  ,  th_3  ],
-            [ 0 ,       0   ,  0    ,  0  ],
-            [ 0 ,       0   ,  0    ,  0   ],
-            [ 0 ,       0   ,  0    ,  0   ]
+            [ 0,        0    ,  a_1  ,  th_1  ],
+            [ -sp.pi/2, l_1  ,  0    ,  th_2 - sp.pi/2    ],
+            [ 0 ,       l_2  ,  0    ,  th_3 + sp.pi/2 ],
+            [ 0 ,       l_3  ,   0    ,  0  ],
+            [ 0 ,       0    ,  0    ,  0   ],
+            [ 0 ,       0    ,  0    ,  0   ]
             ])
         vv = [1,1,1,1,1,1]
 
         variables = [unknown(th_1), unknown(th_2), unknown(th_3)]
 
         params = [a_1,l_1,l_2,l_3]
-        pvals = {a_1:85,l_1:40,l_2:51,l_3:178}
+        pvals = {a_1:85,l_1:40,l_2:178,l_3:147}
 
     if(name == 'MiniDD'):
         #

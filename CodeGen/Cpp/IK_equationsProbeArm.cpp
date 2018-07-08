@@ -75,21 +75,41 @@ int ikin(double T[4][4], double solution_list[64][6] )
     
     // solution 0
     // solvemethod: atan2(y,x)
-    //    argument: r_13
+    //    argument: r_23
     // Atan2(y,x) based solution:
-    th_1 = atan2(r_13, r_11/r_32);
+    th_1 = atan2(-r_13, r_23);
     
     
     
     //Variable: th_2
     
     // solution 0
-    // solvemethod: sinANDcos
-    //    argument: a*b
+    // solvemethod: arccos
+    //    argument: (Pz - a_1 - l_3*r_31)/l_2
+    // Arcsin() or Arccos() based solution:
+    argument = (Pz - a_1 - l_3*r_31)/l_2;
+    if (solvable_pose && fabs(argument) > 1)
+        {
+        solvable_pose = False; 
+        }
+    else if (solvable_pose)
+        {
+        th_2s2 = arccos(argument);
+        }
     
     // solution 1
-    // solvemethod: sinANDcos
-    //    argument: a*b
+    // solvemethod: arccos
+    //    argument: (Pz - a_1 - l_3*r_31)/l_2
+    // Arcsin() or Arccos() based solution:
+    argument = (Pz - a_1 - l_3*r_31)/l_2;
+    if (solvable_pose && fabs(argument) > 1)
+        {
+        solvable_pose = False; 
+        }
+    else if (solvable_pose)
+        {
+        th_2s1 = arccos(argument);
+        }
     
     
     
@@ -97,15 +117,15 @@ int ikin(double T[4][4], double solution_list[64][6] )
     
     // solution 0
     // solvemethod: atan2(y,x)
-    //    argument: r_11*cos(th_1)*cos(th_2) + r_21*sin(th_1)*cos(th_2) + r_31*sin(th_2)
+    //    argument: r_11*cos(th_1)*cos(th_2) + r_21*sin(th_1)*cos(th_2) - r_31*sin(th_2)
     // Atan2(y,x) based solution:
-    th_3s2 = atan2(-r_11*sin(th_2s1)*cos(th_1) - r_21*sin(th_1)*sin(th_2s1) + r_31*cos(th_2s1), r_11*cos(th_1)*cos(th_2s1) + r_21*sin(th_1)*cos(th_2s1) + r_31*sin(th_2s1));
+    th_3s2 = atan2(-r_11*sin(th_2s1)*cos(th_1) - r_21*sin(th_1)*sin(th_2s1) - r_31*cos(th_2s1), r_11*cos(th_1)*cos(th_2s1) + r_21*sin(th_1)*cos(th_2s1) - r_31*sin(th_2s1));
     
     // solution 1
     // solvemethod: atan2(y,x)
-    //    argument: r_11*cos(th_1)*cos(th_2) + r_21*sin(th_1)*cos(th_2) + r_31*sin(th_2)
+    //    argument: r_11*cos(th_1)*cos(th_2) + r_21*sin(th_1)*cos(th_2) - r_31*sin(th_2)
     // Atan2(y,x) based solution:
-    th_3s1 = atan2(-r_11*sin(th_2s2)*cos(th_1) - r_21*sin(th_1)*sin(th_2s2) + r_31*cos(th_2s2), r_11*cos(th_1)*cos(th_2s2) + r_21*sin(th_1)*cos(th_2s2) + r_31*sin(th_2s2));
+    th_3s1 = atan2(-r_11*sin(th_2s2)*cos(th_1) - r_21*sin(th_1)*sin(th_2s2) - r_31*cos(th_2s2), r_11*cos(th_1)*cos(th_2s2) + r_21*sin(th_1)*cos(th_2s2) - r_31*sin(th_2s2));
     
     
     

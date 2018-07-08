@@ -15,8 +15,8 @@ pi = np.pi
 
 a_1 = 85
 l_1 = 40
-l_2 = 51
-l_3 = 178
+l_2 = 178
+l_3 = 147
 
 
 # Code to solve the unknowns 
@@ -47,17 +47,23 @@ def ikin_ProbeArm(T):
 
 
     #Variable:  th_1
-    th_1 = atan2(r_13, r_11/r_32)
+    th_1 = atan2(-r_13, r_23)
 
 
     #Variable:  th_2
-    th_2s2 = atan2(r_13*cos(th_1) + r_23*sin(th_1), -r_33) + pi
-    th_2s1 = atan2(r_13*cos(th_1) + r_23*sin(th_1), -r_33)
+    if (solvable_pose and abs ((Pz - a_1 - l_3*r_31)/l_2)  > 1):
+        solvable_pose = False
+    else:
+    th_2s2 = -acos((Pz - a_1 - l_3*r_31)/l_2)
+    if (solvable_pose and abs ((Pz - a_1 - l_3*r_31)/l_2)  > 1):
+        solvable_pose = False
+    else:
+    th_2s1 = acos((Pz - a_1 - l_3*r_31)/l_2)
 
 
     #Variable:  th_3
-    th_3s2 = atan2(-r_11*sin(th_2s1)*cos(th_1) - r_21*sin(th_1)*sin(th_2s1) + r_31*cos(th_2s1), r_11*cos(th_1)*cos(th_2s1) + r_21*sin(th_1)*cos(th_2s1) + r_31*sin(th_2s1))
-    th_3s1 = atan2(-r_11*sin(th_2s2)*cos(th_1) - r_21*sin(th_1)*sin(th_2s2) + r_31*cos(th_2s2), r_11*cos(th_1)*cos(th_2s2) + r_21*sin(th_1)*cos(th_2s2) + r_31*sin(th_2s2))
+    th_3s2 = atan2(-r_11*sin(th_2s1)*cos(th_1) - r_21*sin(th_1)*sin(th_2s1) - r_31*cos(th_2s1), r_11*cos(th_1)*cos(th_2s1) + r_21*sin(th_1)*cos(th_2s1) - r_31*sin(th_2s1))
+    th_3s1 = atan2(-r_11*sin(th_2s2)*cos(th_1) - r_21*sin(th_1)*sin(th_2s2) - r_31*cos(th_2s2), r_11*cos(th_1)*cos(th_2s2) + r_21*sin(th_1)*cos(th_2s2) - r_31*sin(th_2s2))
 
 
     #Variable:  th_23
